@@ -67,7 +67,7 @@ class GalleryController implements IController{
             where: {id}
         });
 
-        // Construct the path to the file based on the ID (you should adjust this to your file naming logic)
+        // Construct the path to the file based on the ID
         const filePath = path.join(__dirname, '../../img', gallery.img);
 
         // Check if the file exists
