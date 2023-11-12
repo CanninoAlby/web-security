@@ -9,7 +9,8 @@ import  { config as dotenv } from "dotenv";
 //routers
 import AuthRoutes from "./routers/AuthRoutes";
 import GalleryRoutes from "./routers/GalleryRoutes";
-import ScheduleRoutes from "./routers/ScheduleRoute";
+import ScheduleRoutes from "./routers/ScheduleRoutes";
+import OrderRoutes from "./routers/OrderRoutes";
 
 class App{  
     public app: Application;
@@ -34,6 +35,7 @@ class App{
         this.app.use("/api/v1/auth",AuthRoutes);
         this.app.use("/api/v1/gallery",GalleryRoutes);
         this.app.use("/api/v1/schedule",ScheduleRoutes);
+        this.app.use("/api/v1/order",OrderRoutes);
     } 
 }
 
