@@ -9,9 +9,9 @@ class OrderController implements IController{
     index = async(req: Request, res: Response) : Promise<Response> =>{
         const order = await db.order.findAll({});
         if (order) {
-            return res.send(order);
+            return res.send(order );
         }
-        return res.send("order not found");
+        return res.send("order not found    ");
     }
     create = async (req: Request, res: Response) : Promise<Response> =>{
         var {name,address,number,size,quantity,is_buy} = req.body;
