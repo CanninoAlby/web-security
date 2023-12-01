@@ -4,7 +4,7 @@ import path from 'path';
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'img'); // Store uploaded files in the 'uploads' directory
+    cb(null, 'public/img'); // Store uploaded files in the 'uploads' directory
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);

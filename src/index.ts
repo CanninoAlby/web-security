@@ -28,6 +28,7 @@ class App{
         this.app.use(compression());
         this.app.use(helmet());
         this.app.use(cors());
+        
     }
 
 
@@ -36,6 +37,7 @@ class App{
         this.app.use("/api/v1/gallery",GalleryRoutes);
         this.app.use("/api/v1/schedule",ScheduleRoutes);
         this.app.use("/api/v1/order",OrderRoutes);
+        this.app.use("/api/v1/public", express.static('public/img'));
     } 
 }
 
@@ -44,11 +46,3 @@ const app = new App().app;
 app.listen(port,()=>{
     console.log(port);
 });
-
-// const app = express();
-
-// app.route("/").get((req,res) => {
-//     res.send("halloooo")
-// })
-
-// app.listen(8000);

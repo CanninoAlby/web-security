@@ -5,12 +5,17 @@ import fs from 'fs';
 import path from 'path';
 
 const db = require("../db/models");
+const url = "http://localhost:8000/"
 
 class GalleryController implements IController{
     index = async(req: Request, res: Response) : Promise<Response> =>{
         const gallery = await db.gallery.findAll({});
         if (gallery) {
-            return res.send(gallery);
+            const modifiedGallery = gallery.map((item: any) => {
+                item.img = url + "api/v1/public/" + item.img;
+                return item;
+            });
+            return res.status(200).send(modifiedGallery);
         }
         return res.send("file not found");
     }
@@ -22,7 +27,7 @@ class GalleryController implements IController{
         }
         await db.gallery.create({title,img});
 
-        return res.send({
+        return res.status(200).send({
             message : "success create gallery"
         });
     }
@@ -33,9 +38,12 @@ class GalleryController implements IController{
         });
 
         if (gallery) {
-            return res.send(gallery);
+            var message = url+"api/v1/public/" + gallery.img
+            return res.status(200).send({message});
         }
-        return res.send("file not found");
+        return res.send({
+            message : "gallery not found"
+        });
     }
     update = async(req: Request, res: Response) : Promise<Response> =>{
         const {id}= req.params;
@@ -49,7 +57,7 @@ class GalleryController implements IController{
         const gallery = await db.gallery.findOne({
             where: {id}
         });
-        const filePath = path.join(__dirname, '../../img', gallery.img);
+        const filePath = path.join(__dirname, '../../public/img', gallery.img);
         fs.unlinkSync(filePath);
 
         //Update DB
@@ -57,7 +65,7 @@ class GalleryController implements IController{
             where : {id}
         });
 
-        return res.send({
+        return res.status(200).send({
             message : "success update gallery"
         });
     }
