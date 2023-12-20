@@ -22,7 +22,13 @@ class ScheduleController {
         });
     }
     index(req, res) {
-        throw new Error("Method not implemented.");
+        return db.schedule.findAll()
+            .then((schedules) => {
+            return res.json(schedules);
+        })
+            .catch((error) => {
+            return res.status(500).json({ error: "Internal server error" });
+        });
     }
     create(req, res) {
         throw new Error("Method not implemented.");

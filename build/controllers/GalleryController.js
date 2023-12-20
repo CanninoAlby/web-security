@@ -32,6 +32,12 @@ class GalleryController {
         this.create = (req, res) => __awaiter(this, void 0, void 0, function* () {
             var { title } = req.body;
             var img;
+            if (!req.file) {
+                console.log("No file received");
+                return res.send({
+                    success: false
+                });
+            }
             if (req.file) {
                 img = req.file.filename;
             }

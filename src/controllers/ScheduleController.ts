@@ -6,7 +6,13 @@ const db = require("../db/models");
 
 class ScheduleController implements IController{
     index(req: Request, res: Response): Promise<Response> {
-        throw new Error("Method not implemented.");
+        return db.schedule.findAll()
+            .then((schedules: any) => {
+                return res.json(schedules);
+            })
+            .catch((error: any) => {
+                return res.status(500).json({ error: "Internal server error" });
+            });
     }
     create(req: Request, res: Response): Promise<Response> {
         throw new Error("Method not implemented.");

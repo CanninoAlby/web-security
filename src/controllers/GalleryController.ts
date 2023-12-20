@@ -22,6 +22,12 @@ class GalleryController implements IController{
     create = async (req: Request, res: Response) : Promise<Response> =>{
         var {title} = req.body;
         var img;
+        if (!req.file) {
+            console.log("No file received");
+            return res.send({
+              success: false
+            });
+        }
         if(req.file){
             img = req.file.filename;
         }
@@ -38,8 +44,9 @@ class GalleryController implements IController{
         });
 
         if (gallery) {
-            var message = url+"api/v1/public/" + gallery.img
-            return res.status(200).send({message});
+            var img = url+"api/v1/public/" + gallery.img
+            var title = gallery.title
+            return res.status(200).send({title,img});
         }
         return res.send({
             message : "gallery not found"

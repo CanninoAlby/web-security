@@ -11,4 +11,4 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + ext); // Rename files to prevent collisions
   },
 });
-export const upload = multer({ storage });
+export const upload = multer({ storage,limits: { fileSize: 4000000 /* bytes */ } });

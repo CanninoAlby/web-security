@@ -10,6 +10,7 @@ const AuthMiddleware_1 = require("../middlewares/AuthMiddleware");
 class ScheduleRoutes extends BaseRoutes_1.default {
     routes() {
         this.router.put("/:id", AuthMiddleware_1.auth, ScheduleController_1.default.update);
+        this.router.get("", AuthMiddleware_1.auth, ScheduleController_1.default.index);
     }
 }
 exports.default = new ScheduleRoutes().router;

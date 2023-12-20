@@ -13,7 +13,7 @@ import ScheduleRoutes from "./routers/ScheduleRoutes";
 import OrderRoutes from "./routers/OrderRoutes";
 
 class App{  
-    public app: Application;
+    public app: Application;    
 
     constructor(){
         this.app = express();
@@ -27,8 +27,9 @@ class App{
         this.app.use(morgan("dev"));
         this.app.use(compression());
         this.app.use(helmet());
-        this.app.use(cors());
-        
+        this.app.use(cors({
+            origin: '*',
+        }));
     }
 
 
