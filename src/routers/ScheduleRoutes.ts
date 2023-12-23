@@ -8,7 +8,7 @@ class ScheduleRoutes extends BaseRoutes{
 
     public routes(): void{
         this.router.put("/:id",auth,ScheduleController.update);
-        this.router.get("",auth,ScheduleController.index);
+        this.router.get("",ScheduleController.index);
     }
 }
 
